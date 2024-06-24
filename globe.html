@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: flex;
+        }
+        #graphxr-iframe {
+            flex: 1;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe
+        id="graphxr-iframe"
+        src="https://graphxrdev.kineviz.com/share/6676dade6cd804e3ebbba964/CPI/6676db196cd804e3ebbba9f8"
+        width="100%"
+        height="100%"
+        frameborder="0"
+    ></iframe>
+    <script type="module">
+      
+      import gxr from "https://cdn.skypack.dev/@kineviz/graphxr-api-iframe";
+      document
+        .getElementById("graphxr-iframe")
+        .addEventListener("load", async () => {
+          // Wait a few seconds for GraphXR to load.
+          console.log("Loading GraphXR...");
+          setTimeout(async () => {
+
+           const defaultOptions = {
+                  radius: 1,                // The globe’s radius
+                  distance: 0.05,           // The geo node’s distance from the globe’s surface
+                  showLabels: true,         // Whether to show country names on the globe
+                  showBorder: true,         // Whether to show country borders on the globe
+                  borderColor: 0xffffff,    // Color of the country borders
+                  borderOpacity: 0.4,       // Opacity of the country borders
+                  neighborOffset: 0.1,      // Distance of the geo node’s neighbor node from the globe’s surface
+                  neighborDistance: 0.05,   // Distance between geo nodes
+                  dayNightTransition: 0.5,  // Light and dark mode transition (0: day, 1: night)
+                  neighborOrderProperty: "",// Property to order geo node’s neighbors
+                  neighborOrder: "desc"     // Order of neighbors ('asc' or 'desc')
+                };
+           const globe =  await gxr().createGlobe(defaultOptions).projectNodes().plot([],{plotProps: { Country: "incident" },colorScale:"default"}).rotate(true,0.1)
+          }, 3000)
+          debugger
+          console.log(globe)
+
+        });
+
+    </script>
+</body>
+</html>
+
